@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, ... }:
-
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  ...
+}: {
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -82,10 +83,10 @@
   users.users.seb = {
     isNormalUser = true;
     description = "seb";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
     packages = with pkgs; [
       kdePackages.kate
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -96,31 +97,31 @@
       policies = {
         ExtensionSettings = {
           # Decentraleyes:
-	  "jid1-BoFifL9Vbdl2zQ@jetpack" = {
-	    install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
-	    installation_mode = "force_installed";
-	  };
-	  # I still don't care about cookies:
-	  "idcac-pub@guus.ninja" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
-	    installation_mode = "force_installed";
-          };
-	  # SponsorBlock for YouTube - Skip Sponsorships:
-	  "sponsorBlocker@ajay.app" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
-	    installation_mode = "force_installed";
-          };
-	  # YouTube NonStop:
-	  "{0d7cafdd-501c-49ca-8ebb-e3341caaa55e}" = {
-            install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-nonstop/latest.xpi";
-	    installation_mode = "force_installed";
-          };
-	  # ClearURLs:
-	  "{74145f27-f039-47ce-a470-a662b129930a}" = {
-	    install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
+          "jid1-BoFifL9Vbdl2zQ@jetpack" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/decentraleyes/latest.xpi";
             installation_mode = "force_installed";
           };
-	  # uBlock Origin:
+          # I still don't care about cookies:
+          "idcac-pub@guus.ninja" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/istilldontcareaboutcookies/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # SponsorBlock for YouTube - Skip Sponsorships:
+          "sponsorBlocker@ajay.app" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/sponsorblock/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # YouTube NonStop:
+          "{0d7cafdd-501c-49ca-8ebb-e3341caaa55e}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/youtube-nonstop/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # ClearURLs:
+          "{74145f27-f039-47ce-a470-a662b129930a}" = {
+            install_url = "https://addons.mozilla.org/firefox/downloads/latest/clearurls/latest.xpi";
+            installation_mode = "force_installed";
+          };
+          # uBlock Origin:
           "uBlock0@raymondhill.net" = {
             install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
             installation_mode = "force_installed";
@@ -141,9 +142,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
     git
+    alejandra
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -172,5 +174,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.11"; # Did you read the comment?
-
 }
